@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI To-Do List Recommender</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <div class="container">
+    <h1>🤖 AI To-Do List Recommender</h1>
+
+    <form method="POST" class="input-form">
+      <label for="description">Ceritakan siapa kamu atau apa yang ingin kamu lakukan:</label>
+      <textarea
+        id="description"
+        name="description"
+        rows="3"
+        placeholder="Misal: Saya seorang mahasiswa yang ingin belajar lebih efektif"
+        required>{{ user_input }}</textarea>
+      <button type="submit">Minta Rekomendasi</button>
+    </form>
+
+    {% if error_msg %}
+      <p class="error">{{ error_msg }}</p>
+    {% endif %}
+
+    {% if recommendations %}
+      <h2>Rekomendasi Kegiatan:</h2>
+      <ul class="todo-list">
+        {% for item in recommendations %}
+          <li>
+            <label>
+              <input type="checkbox" />
+              {{ item }}
+            </label>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+</body>
+</html>
